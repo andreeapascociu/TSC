@@ -96,7 +96,7 @@ module instr_register_test
     $finish;
   end
 
-  function void randomize_transaction;=
+  function void randomize_transaction;
     if(write_order == 0) begin  // this code has incremental write_pointer
       static int temp = 0;
       operand_a     = $random(seed)%16;                 // between -15 and 15
