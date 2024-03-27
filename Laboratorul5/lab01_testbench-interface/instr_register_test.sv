@@ -30,6 +30,7 @@ module instr_register_test
   parameter RD_NR = 4;
   parameter read_order = 0;         // 0 - for incremental; 1 - for random; 2 - for decremental
   parameter write_order = 0;        // 0 - for incremental; 1 - for random; 2 - for decremental
+ // parameter TEST_NAME;
   int seed = 555;
   int num_errors = 0;
   instruction_t iw_reg_test [0:31];
@@ -44,7 +45,7 @@ module instr_register_test
     read_pointer   = 5'h1F;         // initialize read pointer
     load_en        = 1'b0;          // initialize load control line
     reset_n       <= 1'b0;          // assert reset_n (active low)
-    reset_data();
+    //reset_data();
     repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles
     reset_n        = 1'b1;          // deassert reset_n (active low)
 
