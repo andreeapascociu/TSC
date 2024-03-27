@@ -11,7 +11,7 @@
   // alternari de procese
   // TEMA LABORATOR 5: realizare script pentru automatizarea simularii in modelsim
   // fisier sim cu tot ce creeaza simularea, tools pt..
-  // gitignore sim
+  // .gitignore sim
 module instr_register_test
   import instr_register_pkg::*;  // user-defined types are defined in instr_register_pkg.sv
   (input  logic          clk,

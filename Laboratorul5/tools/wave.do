@@ -11,8 +11,12 @@ add wave -noupdate /top/test/read_pointer
 add wave -noupdate /top/test/instruction_word
 add wave -noupdate /top/test/seed
 add wave -noupdate /top/test/num_errors
+add wave -noupdate /top/test/WR_NR
+add wave -noupdate /top/test/RD_NR
+add wave -noupdate /top/test/read_order
+add wave -noupdate /top/test/write_order
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {42 ns} 0}
+WaveRestoreCursors {{Cursor 1} {250 ns} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 150
 configure wave -valuecolwidth 100
@@ -28,4 +32,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ns
 update
-WaveRestoreZoom {2 ns} {128 ns}
+WaveRestoreZoom {0 ns} {504 ns}
