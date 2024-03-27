@@ -9,7 +9,8 @@ cd ../sim
 :: NUME_TEST SI STATUS DIN FINAL REPORT
 :: Din functie final report scriem in fisier cu fopen() fwrite()/ fdisplay() + fclose()..
 ::echo %1 %2 %3 %4 %5
-vsim -gui -do "do run.do %1 %2 %3 %4 %5" 
+vsim -%6 -do "do run.do %1 %2 %3 %4 %5 %6" 
+cd ../tools
 ::vsim -gui -do "do run.do %1 %2 %3 %4 %5" 
 ::vsim -gui -do run.do
 ::vsim -c -do run.do
