@@ -12,6 +12,8 @@
   // TEMA LABORATOR 5: realizare script pentru automatizarea simularii in modelsim
   // fisier sim cu tot ce creeaza simularea, tools pt..
   // .gitignore sim
+`include "shared_variables.sv"
+
 module instr_register_test
   import instr_register_pkg::*;  // user-defined types are defined in instr_register_pkg.sv
   (input  logic          clk,
@@ -32,7 +34,7 @@ module instr_register_test
   parameter write_order = 0;        // 0 - for incremental; 1 - for random; 2 - for decremental
  // parameter TEST_NAME;
   int seed = 555;
-  int num_errors = 0;
+  //int num_errors = 0;
   instruction_t iw_reg_test [0:31];
 
   initial begin
@@ -45,9 +47,10 @@ module instr_register_test
     read_pointer   = 5'h1F;         // initialize read pointer
     load_en        = 1'b0;          // initialize load control line
     reset_n       <= 1'b0;          // assert reset_n (active low)
-    //reset_data();
+    reset_data();
     repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles
     reset_n        = 1'b1;          // deassert reset_n (active low)
+    //reset_data();
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
@@ -94,6 +97,19 @@ module instr_register_test
     $display(  "***      THIS IS A SELF-CHECKING TESTBENCH.             ***");
     $display(  "***********************************************************\n");
     final_report();
+    //string file_path = "../reports/regression_report.txt";
+    //int file_handle = $fopen(file_path, "a");
+/*
+    if (file_handle == 0) begin
+      $display("Error opening file for writing: %s", file_path);
+    end else begin
+      if (num_errors == 0)
+        $fdisplay(file_handle, "TEST PASSED!");
+      else
+        $fdisplay(file_handle, "TEST FAILED!");
+      
+    $fclose(file_handle);
+    */
     $finish;
   end
 
@@ -123,19 +139,29 @@ module instr_register_test
     iw_reg_test[write_pointer] = '{opcode, operand_a, operand_b, 64'b0};
   endfunction: randomize_transaction
 
+
   function void reset_data();
-  $display("Am intrat in functia de resetare a valorilor din iw_reg_test!");
-    for (int i=0; i<=31; i++) begin
-      //iw_reg_test[i] = '{ZERO, 32'b0, 32'b0, 64'b0};
-      iw_reg_test[i].opc = ZERO;
-      iw_reg_test[i].op_a = 32'b0;
-      iw_reg_test[i].op_b = 32'b0;
-      iw_reg_test[i].res = 64'b0;
-      i++;
-    end
-  endfunction: reset_data
+    $display("Resetting the signals");
+    foreach (iw_reg_test[i])
+        iw_reg_test[i] = '{opc:ZERO,default:0};  // reset to all zeros
+    endfunction: reset_data
+
 
    function void final_report;
+      /*string file_path = "../reports/regression_report.txt";
+      int file_handle = $fopen(file_path, "w");
+
+      if (file_handle == 0) begin
+      $display("Error opening file for writing: %s", file_path);
+      end else begin
+          $fdisplay(file_handle, "Total number of errors encountered: %0d", num_errors);
+      if (num_errors == 0)
+        $fdisplay(file_handle, "TEST PASSED!");
+      else
+        $fdisplay(file_handle, "TEST FAILED!");
+      $fclose(file_handle);
+      end
+*/
         $display("\n*******************************************************");
         $display("***                  FINAL REPORT                   ***");
         $display("*******************************************************");
@@ -166,19 +192,19 @@ module instr_register_test
     if(instruction_word.op_a === iw_reg_test[read_pointer].op_a)
       $display("Value of op_a stored correctly");
     else begin
-      $error("Value of opc is incorrect, the values are %0d and %0d", instruction_word.op_a, iw_reg_test[read_pointer].op_a);
+      $error("Value of opc is incorrect, the values are %0d and %0d predicted", instruction_word.op_a, iw_reg_test[read_pointer].op_a);
        num_errors++;
     end
     if(instruction_word.op_b === iw_reg_test[read_pointer].op_b)
       $display("Value of op_b stored correctly");
     else begin
-      $error("Value of opc is incorrect, the values are %0d and %0d", instruction_word.op_b, iw_reg_test[read_pointer].op_b);
+      $error("Value of opc is incorrect, the values are %0d and %0d predicted", instruction_word.op_b, iw_reg_test[read_pointer].op_b);
        num_errors++;
     end
     if(instruction_word.opc === iw_reg_test[read_pointer].opc)
       $display("Value of opc stored correctly");
     else begin
-      $error("Value of opc is incorrect, the values are %0d and %0d", instruction_word.opc, iw_reg_test[read_pointer].opc);
+      $error("Value of opc is incorrect, the values are %0d and %0d predicted", instruction_word.opc, iw_reg_test[read_pointer].opc);
        num_errors++;
     end
     case (iw_reg_test[read_pointer].opc)
@@ -200,7 +226,7 @@ module instr_register_test
     if(instruction_word.res === iw_reg_test[read_pointer].res)
       $display("The operation between %0d and %0d is correct!\n", iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b);
     else begin
-      $error("The value is incorrect, %0d and %0d should be %0d!\n",iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, iw_reg_test[read_pointer].res);
+      $error("The value is incorrect, %0d and %0d should be %0d predicted!\n",iw_reg_test[read_pointer].op_a, iw_reg_test[read_pointer].op_b, iw_reg_test[read_pointer].res);
        num_errors++;
     end
   endfunction: check_result

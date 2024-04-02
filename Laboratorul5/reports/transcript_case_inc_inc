@@ -1,21 +1,23 @@
 # 1
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 09:36:55 on Mar 27,2024
+# Start time: 21:54:30 on Apr 02,2024
 # vlog -sv -timescale 1ps/1ps -work work -f sources.txt 
 # -- Compiling package instr_register_pkg
 # -- Compiling module instr_register
 # -- Importing package instr_register_pkg
+# -- Compiling package instr_register_test_sv_unit
 # -- Compiling module instr_register_test
+# -- Importing package instr_register_pkg
 # -- Compiling module top
 # 
 # Top level modules:
 # 	top
-# End time: 09:36:55 on Mar 27,2024, Elapsed time: 0:00:00
+# End time: 21:54:30 on Apr 02,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vsim -novopt -quiet -nocoverage "+notimingchecks" "+nowarnTSCALE" -sva top -GWR_NR=50 -GRD_NR=50 -Gwrite_order=0 -Gread_order=0 
-# Start time: 09:36:55 on Mar 27,2024
+# Start time: 21:54:30 on Apr 02,2024
 # ** Warning: (vsim-3017) ../lab01_testbench-interface/top.sv(37): [TFMPC] - Too few port connections. Expected 10, found 9.
-#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../lab_dut/instr_register.sv
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut File: ../lab_dut/instr_register.sv
 # ** Warning: (vsim-3722) ../lab01_testbench-interface/top.sv(37): [TFMPC] - Missing connection for port 'rez'.
 # 
 # 
@@ -24,303 +26,304 @@
 # ***********************************************************
 # 
 # Reseting the instruction register...
+# Resetting the signals
 # 
 # Writing values to register stack...
-# Test: opcode=1, operand_a=-12, operand_b=7 at time 36.
+# Test: opcode=1, operand_a=-12, operand_b=7 at time 36000.
 # Writing to register location 0: 
 #   opcode = 1 (PASSA)
 #   operand_a = -12
 #   operand_b = 7
 # 
-# Test: opcode=0, operand_a=-9, operand_b=1 at time 46.
+# Test: opcode=0, operand_a=-9, operand_b=1 at time 46000.
 # Writing to register location 1: 
 #   opcode = 0 (ZERO)
 #   operand_a = -9
 #   operand_b = 1
 # 
-# Test: opcode=7, operand_a=-15, operand_b=8 at time 56.
+# Test: opcode=7, operand_a=-15, operand_b=8 at time 56000.
 # Writing to register location 2: 
 #   opcode = 7 (MOD)
 #   operand_a = -15
 #   operand_b = 8
 # 
-# Test: opcode=5, operand_a=-8, operand_b=7 at time 66.
+# Test: opcode=5, operand_a=-8, operand_b=7 at time 66000.
 # Writing to register location 3: 
 #   opcode = 5 (MULT)
 #   operand_a = -8
 #   operand_b = 7
 # 
-# Test: opcode=3, operand_a=-9, operand_b=5 at time 76.
+# Test: opcode=3, operand_a=-9, operand_b=5 at time 76000.
 # Writing to register location 4: 
 #   opcode = 3 (ADD)
 #   operand_a = -9
 #   operand_b = 5
 # 
-# Test: opcode=4, operand_a=5, operand_b=3 at time 86.
+# Test: opcode=4, operand_a=5, operand_b=3 at time 86000.
 # Writing to register location 5: 
 #   opcode = 4 (SUB)
 #   operand_a = 5
 #   operand_b = 3
 # 
-# Test: opcode=3, operand_a=3, operand_b=12 at time 96.
+# Test: opcode=3, operand_a=3, operand_b=12 at time 96000.
 # Writing to register location 6: 
 #   opcode = 3 (ADD)
 #   operand_a = 3
 #   operand_b = 12
 # 
-# Test: opcode=6, operand_a=12, operand_b=3 at time 106.
+# Test: opcode=6, operand_a=12, operand_b=3 at time 106000.
 # Writing to register location 7: 
 #   opcode = 6 (DIV)
 #   operand_a = 12
 #   operand_b = 3
 # 
-# Test: opcode=1, operand_a=3, operand_b=14 at time 116.
+# Test: opcode=1, operand_a=3, operand_b=14 at time 116000.
 # Writing to register location 8: 
 #   opcode = 1 (PASSA)
 #   operand_a = 3
 #   operand_b = 14
 # 
-# Test: opcode=1, operand_a=-2, operand_b=9 at time 126.
+# Test: opcode=1, operand_a=-2, operand_b=9 at time 126000.
 # Writing to register location 9: 
 #   opcode = 1 (PASSA)
 #   operand_a = -2
 #   operand_b = 9
 # 
-# Test: opcode=7, operand_a=9, operand_b=9 at time 136.
+# Test: opcode=7, operand_a=9, operand_b=9 at time 136000.
 # Writing to register location 10: 
 #   opcode = 7 (MOD)
 #   operand_a = 9
 #   operand_b = 9
 # 
-# Test: opcode=3, operand_a=9, operand_b=7 at time 146.
+# Test: opcode=3, operand_a=9, operand_b=7 at time 146000.
 # Writing to register location 11: 
 #   opcode = 3 (ADD)
 #   operand_a = 9
 #   operand_b = 7
 # 
-# Test: opcode=5, operand_a=7, operand_b=3 at time 156.
+# Test: opcode=5, operand_a=7, operand_b=3 at time 156000.
 # Writing to register location 12: 
 #   opcode = 5 (MULT)
 #   operand_a = 7
 #   operand_b = 3
 # 
-# Test: opcode=7, operand_a=3, operand_b=5 at time 166.
+# Test: opcode=7, operand_a=3, operand_b=5 at time 166000.
 # Writing to register location 13: 
 #   opcode = 7 (MOD)
 #   operand_a = 3
 #   operand_b = 5
 # 
-# Test: opcode=0, operand_a=-11, operand_b=15 at time 176.
+# Test: opcode=0, operand_a=-11, operand_b=15 at time 176000.
 # Writing to register location 14: 
 #   opcode = 0 (ZERO)
 #   operand_a = -11
 #   operand_b = 15
 # 
-# Test: opcode=6, operand_a=15, operand_b=0 at time 186.
+# Test: opcode=6, operand_a=15, operand_b=0 at time 186000.
 # Writing to register location 15: 
 #   opcode = 6 (DIV)
 #   operand_a = 15
 #   operand_b = 0
 # 
-# Test: opcode=4, operand_a=0, operand_b=14 at time 196.
+# Test: opcode=4, operand_a=0, operand_b=14 at time 196000.
 # Writing to register location 16: 
 #   opcode = 4 (SUB)
 #   operand_a = 0
 #   operand_b = 14
 # 
-# Test: opcode=3, operand_a=-2, operand_b=4 at time 206.
+# Test: opcode=3, operand_a=-2, operand_b=4 at time 206000.
 # Writing to register location 17: 
 #   opcode = 3 (ADD)
 #   operand_a = -2
 #   operand_b = 4
 # 
-# Test: opcode=0, operand_a=-12, operand_b=3 at time 216.
+# Test: opcode=0, operand_a=-12, operand_b=3 at time 216000.
 # Writing to register location 18: 
 #   opcode = 0 (ZERO)
 #   operand_a = -12
 #   operand_b = 3
 # 
-# Test: opcode=4, operand_a=-13, operand_b=8 at time 226.
+# Test: opcode=4, operand_a=-13, operand_b=8 at time 226000.
 # Writing to register location 19: 
 #   opcode = 4 (SUB)
 #   operand_a = -13
 #   operand_b = 8
 # 
-# Test: opcode=1, operand_a=-8, operand_b=12 at time 236.
+# Test: opcode=1, operand_a=-8, operand_b=12 at time 236000.
 # Writing to register location 20: 
 #   opcode = 1 (PASSA)
 #   operand_a = -8
 #   operand_b = 12
 # 
-# Test: opcode=1, operand_a=-4, operand_b=1 at time 246.
+# Test: opcode=1, operand_a=-4, operand_b=1 at time 246000.
 # Writing to register location 21: 
 #   opcode = 1 (PASSA)
 #   operand_a = -4
 #   operand_b = 1
 # 
-# Test: opcode=1, operand_a=-15, operand_b=1 at time 256.
+# Test: opcode=1, operand_a=-15, operand_b=1 at time 256000.
 # Writing to register location 22: 
 #   opcode = 1 (PASSA)
 #   operand_a = -15
 #   operand_b = 1
 # 
-# Test: opcode=7, operand_a=1, operand_b=1 at time 266.
+# Test: opcode=7, operand_a=1, operand_b=1 at time 266000.
 # Writing to register location 23: 
 #   opcode = 7 (MOD)
 #   operand_a = 1
 #   operand_b = 1
 # 
-# Test: opcode=5, operand_a=1, operand_b=15 at time 276.
+# Test: opcode=5, operand_a=1, operand_b=15 at time 276000.
 # Writing to register location 24: 
 #   opcode = 5 (MULT)
 #   operand_a = 1
 #   operand_b = 15
 # 
-# Test: opcode=7, operand_a=-1, operand_b=5 at time 286.
+# Test: opcode=7, operand_a=-1, operand_b=5 at time 286000.
 # Writing to register location 25: 
 #   opcode = 7 (MOD)
 #   operand_a = -1
 #   operand_b = 5
 # 
-# Test: opcode=4, operand_a=5, operand_b=7 at time 296.
+# Test: opcode=4, operand_a=5, operand_b=7 at time 296000.
 # Writing to register location 26: 
 #   opcode = 4 (SUB)
 #   operand_a = 5
 #   operand_b = 7
 # 
-# Test: opcode=4, operand_a=-9, operand_b=4 at time 306.
+# Test: opcode=4, operand_a=-9, operand_b=4 at time 306000.
 # Writing to register location 27: 
 #   opcode = 4 (SUB)
 #   operand_a = -9
 #   operand_b = 4
 # 
-# Test: opcode=5, operand_a=4, operand_b=12 at time 316.
+# Test: opcode=5, operand_a=4, operand_b=12 at time 316000.
 # Writing to register location 28: 
 #   opcode = 5 (MULT)
 #   operand_a = 4
 #   operand_b = 12
 # 
-# Test: opcode=3, operand_a=12, operand_b=5 at time 326.
+# Test: opcode=3, operand_a=12, operand_b=5 at time 326000.
 # Writing to register location 29: 
 #   opcode = 3 (ADD)
 #   operand_a = 12
 #   operand_b = 5
 # 
-# Test: opcode=4, operand_a=-11, operand_b=11 at time 336.
+# Test: opcode=4, operand_a=-11, operand_b=11 at time 336000.
 # Writing to register location 30: 
 #   opcode = 4 (SUB)
 #   operand_a = -11
 #   operand_b = 11
 # 
-# Test: opcode=0, operand_a=11, operand_b=12 at time 346.
+# Test: opcode=0, operand_a=11, operand_b=12 at time 346000.
 # Writing to register location 31: 
 #   opcode = 0 (ZERO)
 #   operand_a = 11
 #   operand_b = 12
 # 
-# Test: opcode=2, operand_a=-4, operand_b=8 at time 356.
+# Test: opcode=2, operand_a=-4, operand_b=8 at time 356000.
 # Writing to register location 0: 
 #   opcode = 2 (PASSB)
 #   operand_a = -4
 #   operand_b = 8
 # 
-# Test: opcode=2, operand_a=8, operand_b=10 at time 366.
+# Test: opcode=2, operand_a=8, operand_b=10 at time 366000.
 # Writing to register location 1: 
 #   opcode = 2 (PASSB)
 #   operand_a = 8
 #   operand_b = 10
 # 
-# Test: opcode=6, operand_a=-6, operand_b=2 at time 376.
+# Test: opcode=6, operand_a=-6, operand_b=2 at time 376000.
 # Writing to register location 2: 
 #   opcode = 6 (DIV)
 #   operand_a = -6
 #   operand_b = 2
 # 
-# Test: opcode=1, operand_a=2, operand_b=14 at time 386.
+# Test: opcode=1, operand_a=2, operand_b=14 at time 386000.
 # Writing to register location 3: 
 #   opcode = 1 (PASSA)
 #   operand_a = 2
 #   operand_b = 14
 # 
-# Test: opcode=4, operand_a=14, operand_b=9 at time 396.
+# Test: opcode=4, operand_a=14, operand_b=9 at time 396000.
 # Writing to register location 4: 
 #   opcode = 4 (SUB)
 #   operand_a = 14
 #   operand_b = 9
 # 
-# Test: opcode=7, operand_a=-7, operand_b=12 at time 406.
+# Test: opcode=7, operand_a=-7, operand_b=12 at time 406000.
 # Writing to register location 5: 
 #   opcode = 7 (MOD)
 #   operand_a = -7
 #   operand_b = 12
 # 
-# Test: opcode=1, operand_a=12, operand_b=7 at time 416.
+# Test: opcode=1, operand_a=12, operand_b=7 at time 416000.
 # Writing to register location 6: 
 #   opcode = 1 (PASSA)
 #   operand_a = 12
 #   operand_b = 7
 # 
-# Test: opcode=5, operand_a=-9, operand_b=1 at time 426.
+# Test: opcode=5, operand_a=-9, operand_b=1 at time 426000.
 # Writing to register location 7: 
 #   opcode = 5 (MULT)
 #   operand_a = -9
 #   operand_b = 1
 # 
-# Test: opcode=6, operand_a=-15, operand_b=13 at time 436.
+# Test: opcode=6, operand_a=-15, operand_b=13 at time 436000.
 # Writing to register location 8: 
 #   opcode = 6 (DIV)
 #   operand_a = -15
 #   operand_b = 13
 # 
-# Test: opcode=3, operand_a=-3, operand_b=6 at time 446.
+# Test: opcode=3, operand_a=-3, operand_b=6 at time 446000.
 # Writing to register location 9: 
 #   opcode = 3 (ADD)
 #   operand_a = -3
 #   operand_b = 6
 # 
-# Test: opcode=3, operand_a=6, operand_b=3 at time 456.
+# Test: opcode=3, operand_a=6, operand_b=3 at time 456000.
 # Writing to register location 10: 
 #   opcode = 3 (ADD)
 #   operand_a = 6
 #   operand_b = 3
 # 
-# Test: opcode=1, operand_a=-13, operand_b=11 at time 466.
+# Test: opcode=1, operand_a=-13, operand_b=11 at time 466000.
 # Writing to register location 11: 
 #   opcode = 1 (PASSA)
 #   operand_a = -13
 #   operand_b = 11
 # 
-# Test: opcode=7, operand_a=11, operand_b=1 at time 476.
+# Test: opcode=7, operand_a=11, operand_b=1 at time 476000.
 # Writing to register location 12: 
 #   opcode = 7 (MOD)
 #   operand_a = 11
 #   operand_b = 1
 # 
-# Test: opcode=5, operand_a=-15, operand_b=15 at time 486.
+# Test: opcode=5, operand_a=-15, operand_b=15 at time 486000.
 # Writing to register location 13: 
 #   opcode = 5 (MULT)
 #   operand_a = -15
 #   operand_b = 15
 # 
-# Test: opcode=1, operand_a=15, operand_b=13 at time 496.
+# Test: opcode=1, operand_a=15, operand_b=13 at time 496000.
 # Writing to register location 14: 
 #   opcode = 1 (PASSA)
 #   operand_a = 15
 #   operand_b = 13
 # 
-# Test: opcode=7, operand_a=-3, operand_b=1 at time 506.
+# Test: opcode=7, operand_a=-3, operand_b=1 at time 506000.
 # Writing to register location 15: 
 #   opcode = 7 (MOD)
 #   operand_a = -3
 #   operand_b = 1
 # 
-# Test: opcode=0, operand_a=1, operand_b=15 at time 516.
+# Test: opcode=0, operand_a=1, operand_b=15 at time 516000.
 # Writing to register location 16: 
 #   opcode = 0 (ZERO)
 #   operand_a = 1
 #   operand_b = 15
 # 
-# Test: opcode=6, operand_a=15, operand_b=0 at time 526.
+# Test: opcode=6, operand_a=15, operand_b=0 at time 526000.
 # Writing to register location 17: 
 #   opcode = 6 (DIV)
 #   operand_a = 15
@@ -506,8 +509,8 @@
 # Value of op_a stored correctly
 # Value of op_b stored correctly
 # Value of opc stored correctly
-# ** Error: The value is incorrect, 15 and 0 should be 0!
-#    Time: 724 ns  Scope: top.test.check_result File: ../lab01_testbench-interface/instr_register_test.sv Line: 203
+# ** Error: The value is incorrect, 15 and 0 should be 0 predicted!
+#    Time: 724 ns  Scope: top.test.check_result File: ../lab01_testbench-interface/instr_register_test.sv Line: 229
 # Read from register location 18: 
 #   opcode = 0 (ZERO)
 #   operand_a = -12
@@ -826,8 +829,8 @@
 # Value of op_a stored correctly
 # Value of op_b stored correctly
 # Value of opc stored correctly
-# ** Error: The value is incorrect, 15 and 0 should be 0!
-#    Time: 1044 ns  Scope: top.test.check_result File: ../lab01_testbench-interface/instr_register_test.sv Line: 203
+# ** Error: The value is incorrect, 15 and 0 should be 0 predicted!
+#    Time: 1044 ns  Scope: top.test.check_result File: ../lab01_testbench-interface/instr_register_test.sv Line: 229
 # Read from register location 18: 
 #   opcode = 0 (ZERO)
 #   operand_a = -12
@@ -851,7 +854,7 @@
 # Oops! There were 2 errors detected.
 # *******************************************************
 # 
-# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(97)
+# ** Note: $finish    : ../lab01_testbench-interface/instr_register_test.sv(113)
 #    Time: 1056 ns  Iteration: 1  Instance: /top/test
-# End time: 09:36:56 on Mar 27,2024, Elapsed time: 0:00:01
+# End time: 21:54:30 on Apr 02,2024, Elapsed time: 0:00:00
 # Errors: 2, Warnings: 2
