@@ -32,8 +32,9 @@ module instr_register_test
   parameter RD_NR = 4;
   parameter read_order = 0;         // 0 - for incremental; 1 - for random; 2 - for decremental
   parameter write_order = 0;        // 0 - for incremental; 1 - for random; 2 - for decremental
+  parameter seed_val = 999;
  // parameter TEST_NAME;
-  int seed = 555;
+  int seed = seed_val;
   //int num_errors = 0;
   instruction_t iw_reg_test [0:31];
 
@@ -189,6 +190,7 @@ module instr_register_test
   endfunction: print_results
 
   function void check_result();
+    //int file;
     if(instruction_word.op_a === iw_reg_test[read_pointer].op_a)
       $display("Value of op_a stored correctly");
     else begin

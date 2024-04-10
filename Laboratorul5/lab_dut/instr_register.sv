@@ -62,6 +62,8 @@ function result calc_result(opcode_t opcode, operand_t op_a, operand_t op_b);
       MULT: calc_result = op_a * op_b;
       DIV: calc_result = op_a / op_b;
       MOD: calc_result = op_a % op_b;
+
+      // TEMA: RIDIVARE LA PUTERE **
       default: calc_result = 0; // Handle unsupported opcodes
     endcase
   endfunction: calc_result
