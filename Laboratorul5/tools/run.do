@@ -23,7 +23,7 @@ if {$compile_on || [batch_mode] == 0} {
 
 # Load project
  # Modifications for parameters in the command line
-  eval vsim -novopt -quiet -nocoverage +notimingchecks +nowarnTSCALE -GWR_NR=$1 -GRD_NR=$2 -Gwrite_order=$3 -Gread_order=$4 -Gseed_val=$5  -sva top
+  eval vsim -novopt -quiet -nocoverage +notimingchecks +nowarnTSCALE -GWR_NR=$1 -GRD_NR=$2 -Gwrite_order=$3 -Gread_order=$4 -GTEST_NAME=$5 -Gseed_val=$6  -sva top
 # eval vsim -novopt -quiet -coverage +code=bcesft +notimingchecks +nowarnTSCALE -sva top
 
 # Run log/wave commands

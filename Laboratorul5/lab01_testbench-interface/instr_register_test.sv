@@ -5,15 +5,6 @@
  * a scoreboard for self-verification.
  **********************************************************************/
 
-  // TEMA FIX THE BUG
-  // TEMA laborator 4 functia de final report si debug pe intreg mediul
-  // Cele 9 cazuri de combinatii intre tipurile de read si write: inc-inc, dec-inc, rand-inc...
-  // alternari de procese
-  // TEMA LABORATOR 5: realizare script pentru automatizarea simularii in modelsim
-  // fisier sim cu tot ce creeaza simularea, tools pt..
-  // .gitignore sim
-`include "shared_variables.sv"
-
 module instr_register_test
   import instr_register_pkg::*;  // user-defined types are defined in instr_register_pkg.sv
   (input  logic          clk,
@@ -33,9 +24,10 @@ module instr_register_test
   parameter read_order = 0;         // 0 - for incremental; 1 - for random; 2 - for decremental
   parameter write_order = 0;        // 0 - for incremental; 1 - for random; 2 - for decremental
   parameter seed_val = 999;
- // parameter TEST_NAME;
+  parameter TEST_NAME = "test";
   int seed = seed_val;
-  //int num_errors = 0;
+  int num_errors = 0;
+
   instruction_t iw_reg_test [0:31];
 
   initial begin
@@ -51,26 +43,19 @@ module instr_register_test
     reset_data();
     repeat (2) @(posedge clk) ;     // hold in reset for 2 clock cycles
     reset_n        = 1'b1;          // deassert reset_n (active low)
-    //reset_data();
 
     $display("\nWriting values to register stack...");
     @(posedge clk) load_en = 1'b1;  // enable writing to register
-    //repeat (3) begin A. P.
+    
     repeat (WR_NR) begin
       @(posedge clk) randomize_transaction;
-      @(negedge clk) print_transaction;
-      
+      @(negedge clk) print_transaction;  
     end
     @(posedge clk) load_en = 1'b0;  // turn-off writing to register
 
-    // read back and display same three register locations
     $display("\nReading back the same register locations written...");
-    //for (int i=0; i<=2; i++) begin
     if(read_order==0) begin
       for (int i=0; i<=RD_NR; i++) begin
-        // later labs will replace this loop with iterating through a
-        // scoreboard to determine which addresses were written and
-        // the expected values to be read back
         @(posedge clk) read_pointer = i;
         @(negedge clk) print_results;
         check_result(); 
@@ -98,71 +83,48 @@ module instr_register_test
     $display(  "***      THIS IS A SELF-CHECKING TESTBENCH.             ***");
     $display(  "***********************************************************\n");
     final_report();
-    //string file_path = "../reports/regression_report.txt";
-    //int file_handle = $fopen(file_path, "a");
-/*
-    if (file_handle == 0) begin
-      $display("Error opening file for writing: %s", file_path);
-    end else begin
-      if (num_errors == 0)
-        $fdisplay(file_handle, "TEST PASSED!");
-      else
-        $fdisplay(file_handle, "TEST FAILED!");
-      
-    $fclose(file_handle);
-    */
+    write_to_file();
     $finish;
+
   end
 
+//////////////////////// TRANSACTION RANDOMIZATION ////////////////////////////////////////////////////////
   function void randomize_transaction;
     if(write_order == 0) begin  // this code has incremental write_pointer
       static int temp = 0;
       operand_a     = $random(seed)%16;                 // between -15 and 15
       operand_b     = $unsigned($random)%16;            // between 0 and 15
-      opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+      opcode        = opcode_t'($unsigned($random)%9);  // between 0 and 7, cast to opcode_t type
       write_pointer = temp++;
     end
     else if(write_order == 1) begin  // this code has random write_pointer
       operand_a     = $random(seed)%16;                 // between -15 and 15
       operand_b     = $unsigned($random)%16;            // between 0 and 15
-      opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+      opcode        = opcode_t'($unsigned($random)%9);  // between 0 and 7, cast to opcode_t type
       write_pointer = $unsigned($random)%32;
     end
     else if(write_order == 2) begin
       static int temp = 31;
       operand_a     = $random(seed)%16;                 // between -15 and 15
       operand_b     = $unsigned($random)%16;            // between 0 and 15
-      opcode        = opcode_t'($unsigned($random)%8);  // between 0 and 7, cast to opcode_t type
+      opcode        = opcode_t'($unsigned($random)%9);  // between 0 and 7, cast to opcode_t type
       write_pointer = temp--;
     end
     
     $display("Test: opcode=%0d, operand_a=%0d, operand_b=%0d at time %0t.", opcode, operand_a, operand_b, $time);
     iw_reg_test[write_pointer] = '{opcode, operand_a, operand_b, 64'b0};
+    //iw_reg_test[0] = '{opcode, operand_a, operand_b, 0};
   endfunction: randomize_transaction
 
-
+//////////////////////// FUNCTION FOR RESETING THE DATA ////////////////////////////////////////////////////////
   function void reset_data();
     $display("Resetting the signals");
     foreach (iw_reg_test[i])
         iw_reg_test[i] = '{opc:ZERO,default:0};  // reset to all zeros
     endfunction: reset_data
 
-
+//////////////////////// FINAL REPORT /////////////////////////////////////////////////////////////////////////
    function void final_report;
-      /*string file_path = "../reports/regression_report.txt";
-      int file_handle = $fopen(file_path, "w");
-
-      if (file_handle == 0) begin
-      $display("Error opening file for writing: %s", file_path);
-      end else begin
-          $fdisplay(file_handle, "Total number of errors encountered: %0d", num_errors);
-      if (num_errors == 0)
-        $fdisplay(file_handle, "TEST PASSED!");
-      else
-        $fdisplay(file_handle, "TEST FAILED!");
-      $fclose(file_handle);
-      end
-*/
         $display("\n*******************************************************");
         $display("***                  FINAL REPORT                   ***");
         $display("*******************************************************");
@@ -174,6 +136,7 @@ module instr_register_test
         $display("*******************************************************\n");
     endfunction
 
+//////////////////////// PRINT TRANSACTION /////////////////////////////////////////////////////////////////////
   function void print_transaction;
     $display("Writing to register location %0d: ", write_pointer);
     $display("  opcode = %0d (%s)", opcode, opcode.name);
@@ -181,6 +144,7 @@ module instr_register_test
     $display("  operand_b = %0d\n", operand_b);
   endfunction: print_transaction
 
+//////////////////////// PRINT RESULTS /////////////////////////////////////////////////////////////////////////
   function void print_results;
     $display("Read from register location %0d: ", read_pointer);
     $display("  opcode = %0d (%s)", instruction_word.opc, instruction_word.opc.name);
@@ -189,6 +153,7 @@ module instr_register_test
     $display("  result = %0d", instruction_word.res);
   endfunction: print_results
 
+//////////////////////// FUNCTION FOR RESULT CHECKING //////////////////////////////////////////////////////////
   function void check_result();
     //int file;
     if(instruction_word.op_a === iw_reg_test[read_pointer].op_a)
@@ -222,7 +187,18 @@ module instr_register_test
         else
           iw_reg_test[read_pointer].res = iw_reg_test[read_pointer].op_a / iw_reg_test[read_pointer].op_b;
       end
-      MOD: iw_reg_test[read_pointer].res = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
+      MOD: begin
+        if(iw_reg_test[read_pointer].op_b === 0)
+          iw_reg_test[read_pointer].res = 0;
+        else
+          iw_reg_test[read_pointer].res = iw_reg_test[read_pointer].op_a % iw_reg_test[read_pointer].op_b;
+      end
+      POW: begin
+         if(iw_reg_test[read_pointer].op_a === 0)
+            iw_reg_test[read_pointer].res = 0;
+          else
+            iw_reg_test[read_pointer].res = iw_reg_test[read_pointer].op_a ** iw_reg_test[read_pointer].op_b;
+      end
       default: iw_reg_test[read_pointer].res = 0; 
     endcase
     if(instruction_word.res === iw_reg_test[read_pointer].res)
@@ -232,5 +208,20 @@ module instr_register_test
        num_errors++;
     end
   endfunction: check_result
+
+//////////////////////// FUNCTION FOR WRITING IN THE REGRESSION REPORT TEXT FILE //////////////////////////////////
+   function void write_to_file;
+    int file;
+    file = $fopen("../reports/regression_report.txt", "a");
+    if(num_errors == 0) begin
+      $fdisplay(file, "%s : Test passed", TEST_NAME);
+    end
+    else begin
+      $fdisplay(file, "%s : Test failed", TEST_NAME);
+    end
+    $fclose(file);
+
+  endfunction: write_to_file
+
 
 endmodule: instr_register_test
